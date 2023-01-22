@@ -1,12 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const dbConnection = require("./config/db");
+const adminRouter = require("./routes/adminRoutes");
 const userRouter = require("./routes/userRoutes");
 const app = express();
 // {================================================MIDDLE_WARE==============================}
-app.use(express.json())
+app.use(express.json());
 
 app.use("/users", userRouter);
+app.use("/admin", adminRouter);
 
 app.listen(process.env.PORT, async () => {
   try {
