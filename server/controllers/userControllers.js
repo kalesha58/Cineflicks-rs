@@ -40,4 +40,48 @@ const signUp = async (req, res, next) => {
   }
   return res.status(201).json({ user });
 };
-module.exports = { getAllUsers, signUp };
+// {=====================================UPDATE_USER=================================}
+const updateUser = async (req, res, next) => {
+  const id = req.params.id;
+  const { name, email, password } = req.body;
+  if (
+    !name &&
+    name.trim() === "" &&
+    !email &&
+    email.trim() === "" &&
+    !password &&
+    password.trim() === ""
+  ) {
+    return res.status(422).json({ message: "Invalid Inputs" });
+  }
+  const hashPassword = bcrypt.hashSync(password);
+  let user;
+  try {
+    user = await User.findByIdAndUpdate(id, {
+      name,
+      email,
+      password: hashPassword,
+    });
+  } catch (error) {
+    return console.log(error);
+  }
+  if (!user) {
+    return res.status(500).json({ message: "Something went Worng" });
+  }
+  res.status(200).json({ message: "Updated Sucessfully" });
+};
+// {=====================================DELETE_USER=================================}
+const deleteUser = async (req, res, nest) => {
+  const id = req.params.id;
+  let user;
+  try {
+    user = await User.findByIdAndRemove(id);
+  } catch (error) {
+    console.log(error);
+  }
+  if (!user) {
+    return res.status(500).json({ message: "Something went Worng" });
+  }
+  res.status(200).json({ message: "Delete Sucessfully" });
+};
+module.exports = { getAllUsers, signUp, updateUser,deleteUser };
