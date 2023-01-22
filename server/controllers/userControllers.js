@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 // {=====================================GET_USERS=================================}
 const getAllUsers = async (req, res, next) => {
@@ -26,9 +27,10 @@ const signUp = async (req, res, next) => {
   ) {
     return res.status(422).json({ message: "Invalid Inputs" });
   }
+  const hashPassword = bcrypt.hashSync(password);
   let user;
   try {
-    user = await new User({ name, email, password });
+    user = await new User({ name, email, password: hashPassword });
     user = user.save();
   } catch (error) {
     return next(error);
