@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const Booking = require("../models/Booking");
 
 // {=====================================GET_USERS=================================}
 const getAllUsers = async (req, res, next) => {
@@ -106,4 +107,19 @@ const loginUser = async (req, res, next) => {
   }
   return res.status(200).json({message:"Login Successfull!..."})
 };
-module.exports = { getAllUsers, signUp, updateUser, deleteUser,loginUser };
+// {=====================================GETBOOKING_USER=================================}
+const getBookingsOfUser=async(req,res,next)=>{
+  const id=req.params.id;
+  let bookings;
+  try {
+    bookings=await Booking.find({user:id});
+
+  } catch (error) {
+    return console.log(error)
+  }
+  if(!bookings){
+    return res.status(500).json({message:"Unable to get Booking"})
+  }
+  return res.status(200).json({bookings})
+}
+module.exports = { getAllUsers, signUp, updateUser, deleteUser,loginUser ,getBookingsOfUser};

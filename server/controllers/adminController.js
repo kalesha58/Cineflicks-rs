@@ -55,4 +55,17 @@ const adminLogin = async (req, res, next) => {
   const token=jwt.sign({id:existingAdmin._id},process.env.JWT_SECRET,{expiresIn:"7d",})
   return res.status(200).json({ message: "Authentication is Completed" ,token,id:existingAdmin._id});
 };
-module.exports = { addAdmin ,adminLogin};
+// {=====================================GET_ALL_ADMINS==============================}
+const getAdmins=async(req,res,next)=>{
+let admins;
+try {
+  admins=await Admin.find();
+} catch (error) {
+  return console.log(error)
+}
+if(!admins){
+  return  res.status(500).json({message:"Invalid Server Error"});
+}
+return res.status(200).json({admins})
+}
+module.exports = { addAdmin ,adminLogin,getAdmins};

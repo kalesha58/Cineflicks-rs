@@ -21,7 +21,7 @@ const movieSchema = new mongoose.Schema({
   featured: {
     type: Boolean,
   },
-  bookings: [{ type: String }],
-  admin: { type: String},
+  bookings: [{ type: mongoose.Types.ObjectId, ref: "booking" }],
+  admin: { type: mongoose.Types.ObjectId, ref: "admin", required: true },
 });
 module.exports = mongoose.model("movie", movieSchema);
