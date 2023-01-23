@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const dbConnection = require("./config/db");
 const adminRouter = require("./routes/adminRoutes");
+const bookingRouter = require("./routes/bookingRoute");
 const movieRouter = require("./routes/movieRoutes");
 const userRouter = require("./routes/userRoutes");
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/admin", adminRouter);
 app.use("/movie", movieRouter);
+app.use("/booking", bookingRouter);
 
 app.listen(process.env.PORT, async () => {
   try {
