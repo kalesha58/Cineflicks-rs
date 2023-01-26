@@ -77,6 +77,7 @@ const Header = () => {
 
   const logout = (isAdmin) => {
     dispatch(isAdmin ? adminActions.logout() : userActions.logout());
+    
   };
   return (
     <div className="header">
@@ -108,7 +109,7 @@ const Header = () => {
             </Link>
             <Link
               to="/"
-              onClick={() => logout()}
+              onClick={() => logout(false)}
               style={{ textDecoration: "none" }}
             >
               <span>LOGOUT</span>
@@ -123,7 +124,7 @@ const Header = () => {
             <Link to="/admin" style={{ textDecoration: "none" }}>
               <span>PROFILE</span>
             </Link>
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link   onClick={() => logout(true)}  to="/" style={{ textDecoration: "none" }}>
               <span>LOGOUT</span>
             </Link>
           </>

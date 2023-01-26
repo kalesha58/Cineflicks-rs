@@ -9,22 +9,25 @@ const userSlice = createSlice({
       state.IsLogegedIn = true;
     },
     logout(state) {
-      state.IsLogegedIn = false;
+        localStorage.removeItem("userId")
+        state.IsLogegedIn = false;
     },
-  },
+},
 });
 
 const adminSlice = createSlice({
-  name: "auth",
-  initialState: {
-    IsLogegedIn: false,
-  },
-  reducers: {
-    login(state) {
-      state.IsLogegedIn = true;
+    name: "auth",
+    initialState: {
+        IsLogegedIn: false,
     },
-    logout(state) {
-      state.IsLogegedIn = false;
+    reducers: {
+        login(state) {
+            state.IsLogegedIn = true;
+        },
+        logout(state) {
+            localStorage.removeItem("adminId")
+            localStorage.removeItem("token")
+            state.IsLogegedIn = false;
     },
   },
 });
