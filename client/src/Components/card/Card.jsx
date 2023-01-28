@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@mui/material";
-const Card = ({title,releaseDate,posterUrl,id,description}) => {
+const Card = ({title,releaseDate,posterUrl,id,description,vote_average}) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -35,7 +35,7 @@ const Card = ({title,releaseDate,posterUrl,id,description}) => {
               <div className="card__runtime">
               {new Date(releaseDate).toDateString()}
                 <span className="card__rating">
-                 
+                {vote_average }
                   <i className="fas fa-star" />
                 </span>
               </div>
@@ -43,9 +43,11 @@ const Card = ({title,releaseDate,posterUrl,id,description}) => {
               {description}
                 {/* {movie ? movie.overview.slice(0, 118) + "..." : ""} */}
               </div>
+              <Link to={`/booking/${id}`} >
               <div>
                 <Button bg={"#fff"} >Book</Button>
               </div>
+              </Link>
             </div>
           </div>
         // </Link>

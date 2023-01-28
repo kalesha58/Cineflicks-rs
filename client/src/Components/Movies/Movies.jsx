@@ -18,7 +18,7 @@ const Movies = () => {
     <div className="list__cards">
         {
            movies &&  movies.map(el => (
-                <Card key={el.id} title={el.title } posterUrl={el.posterUrl} releaseDate={el.releaseDate} id={el.id} description={el.description } />
+                <Card key={el._id} title={el.title }  vote_average={el.vote_average} posterUrl={el.posterUrl} releaseDate={el.releaseDate} id={el._id} description={el.description } />
             ))
         }
     </div>

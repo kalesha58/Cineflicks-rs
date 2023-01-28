@@ -5,17 +5,15 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 // import { Provider } from "react-redux";
-import {Provider} from "react-redux"
+import { Provider } from "react-redux";
 import { store } from "./store";
-axios.defaults.baseURL="http://localhost:5000/"
+axios.defaults.baseURL = "http://localhost:5000/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
-    <BrowserRouter>
-<Provider store={store}>
+  <BrowserRouter>
+    <Provider store={store}>
       <App />
-</Provider>
-    </BrowserRouter>
-
+    </Provider>
+  </BrowserRouter>
 );
