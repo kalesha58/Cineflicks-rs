@@ -29,7 +29,7 @@ const newBokking = async (req, res, next) => {
       seatNumber,
       user,
     });
-
+console.log(booking)
     const session = await mongoose.startSession();
     session.startTransaction();
     existingUser.bookings.push(booking);

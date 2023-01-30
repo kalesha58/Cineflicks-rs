@@ -5,8 +5,10 @@ const adminRouter = require("./routes/adminRoutes");
 const bookingRouter = require("./routes/bookingRoute");
 const movieRouter = require("./routes/movieRoutes");
 const userRouter = require("./routes/userRoutes");
+const cors=require("cors")
 const app = express();
 // {================================================MIDDLE_WARE==============================}
+app.use(cors())
 app.use(express.json());
 
 app.use("/users", userRouter);

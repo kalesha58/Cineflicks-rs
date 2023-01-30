@@ -18,21 +18,35 @@ const addMovie = async (req, res, next) => {
     }
   });
   // ==============================CREATE_NEW_MOBVIE=====================
-  const { title, description, actors, releaseDate, posterUrl, featured } =
-    req.body;
+  const {
+    title,
+    description,
+    actors,
+    releaseDate,
+    posterUrl,
+    featured,
+    vote_average,
+    poster_path,
+    tagline,
+    runtime,
+  } = req.body;
   if (
+    (!poster_path && poster_path.trim() === "",
+    vote_average && vote_average.trim() === "",
+    tagline && tagline.trim() === "",
+    runtime && runtime.trim() === "",
     !title &&
-    title.trim() === "" &&
-    !description &&
-    description.trim() === "" &&
-    !actors &&
-    actors.trim() === "" &&
-    !releaseDate &&
-    releaseDate.trim() === "" &&
-    posterUrl.trim() === "" &&
-    !posterUrl &&
-    !featured &&
-    featured.trim() === ""
+      title.trim() === "" &&
+      !description &&
+      description.trim() === "" &&
+      !actors &&
+      actors.trim() === "" &&
+      !releaseDate &&
+      releaseDate.trim() === "" &&
+      posterUrl.trim() === "" &&
+      !posterUrl &&
+      !featured &&
+      featured.trim() === "")
   ) {
     return res.status(422).json({ message: "Invalid InputFeild" });
   }
@@ -42,10 +56,13 @@ const addMovie = async (req, res, next) => {
       title,
       description,
       actors,
-
+      vote_average,
+      poster_path,
       releaseDate: new Date(`${releaseDate}`),
       posterUrl,
       featured,
+      tagline,
+      runtime,
       admin: adminId,
     });
 

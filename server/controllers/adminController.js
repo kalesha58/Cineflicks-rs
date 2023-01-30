@@ -52,7 +52,7 @@ const adminLogin = async (req, res, next) => {
   if (!isPasswordCorrect) {
     return res.status(400).json({ meesage: "Inccorect Password" });
   }
-  const token=jwt.sign({id:existingAdmin._id},process.env.JWT_SECRET,{expiresIn:"7d",})
+  const token=jwt.sign({id:existingAdmin._id},process.env.JWT_SECRET,{expiresIn:"10d",})
   return res.status(200).json({ message: "Authentication is Completed" ,token,id:existingAdmin._id});
 };
 // {=====================================GET_ALL_ADMINS==============================}

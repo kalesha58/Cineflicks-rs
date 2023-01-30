@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema({
     minLength: 6,
   },
   bookings: [{ type: mongoose.Types.ObjectId, ref: "booking" }],
+  picture: {
+    type: String,
+    required: true,
+    default:
+      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
