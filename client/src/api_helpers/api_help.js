@@ -10,11 +10,13 @@ export const getAllMovies = async () => {
 };
 
 export const sendUserAuthRequest = async (data, signup) => {
+  console.log("data",data)
   const res = await axios
     .post(`/users/${signup ? "signup" : "login"}`, {
       name: signup ? data.name : "",
       email: data.email,
       password: data.password,
+      picture:data.picture
     })
     .catch((err) => console.log(err));
   if (res.status !== 200 && res.status !== 201) {
@@ -65,7 +67,18 @@ export const newBoking = async (data) => {
 
 export const getUserBooking=async()=>{
   const id=localStorage.getItem("userId")
-  let res=await axios.get(`/users/bookings/${id}`).catch((err)=>{
+  const res=await axios.get(`/users/bookings/${id}`).catch((err)=>{
+    console.log(err)
+  })
+  if(res.status!==200){
+    return console.log("UnExpected Error ")
+  }
+const   resData=await res.data
+ return resData
+}
+export const getUser=async()=>{
+  const id=localStorage.getItem("userId")
+  const res=await axios.get(`/users/${id}`).catch((err)=>{
     console.log(err)
   })
   if(res.status!==200){
